@@ -10,8 +10,8 @@ This is a simple Rmd-script that is used to illustrate how it can be
 transformed into a plain R script.
 
 ## First some code
-Let's first add a chunk to see how it looks like after conversion.
-```{r demo-chunk}
+Load some toy data.
+```{r demo-chunk, echo = T}
 # load some data
 data(mtcars)
 ```
