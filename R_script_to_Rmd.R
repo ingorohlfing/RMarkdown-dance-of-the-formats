@@ -1,5 +1,5 @@
 #' ---
-#' title: "Rmd to R script"
+#' title: "R script to Rmd"
 #' author: "Ingo Rohlfing"
 #' date: "`r Sys.Date()`"
 #' output: pdf_document
@@ -11,15 +11,12 @@
 #' 
 #' ## First some code
 #' Load some toy data.
-## ----demo-chunk, echo = T---------------------------------------------------------------------------------------
+#+ demo-chunk, echo = TRUE
 # load some data
 data(mtcars)
 
-#' 
 #' The dataset has `r nrow(mtcars)` rows (to have some inline code).  
 #' And let's a plot of *miles per gallon* (`mpg`) against weight (`wt`).
-#' 
-## ---------------------------------------------------------------------------------------------------------------
+#+ 
 plot(mtcars$mpg, mtcars$wt)
 
-#' 

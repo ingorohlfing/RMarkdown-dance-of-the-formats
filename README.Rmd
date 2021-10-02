@@ -130,4 +130,71 @@ data(mtcars)
 The formatting is different in the script, but the exact same info is preserved.
 You see knitted PDFs are the same when you prepare a PDF report for
 [the Rmd file](Rmd_to_PDF.pdf) and the 
-[converted R script](complete_script_2.pdf).
+[converted R script](complete_script_2.pdf). (I haven't edited the R script
+after conversion, so they also have the same title.)
+
+## From an R script to an Rmd file
+When you have an R script like [this one](R_script_to_Rmd.R) and want to 
+turn it into an Rmd file, you need `knitr::spin()`. This is the command doing
+the job.
+```{r}
+knitr::spin(hair = "R_script_to_Rmd.R", 
+            format = "Rmd", 
+            knit = FALSE) # we don't an html and md file for the R script now
+```
+
+For illustration, this part of the R script...
+```
+#' Load some toy data.
+#+ demo-chunk, echo = TRUE
+# load some data
+data(mtcars)
+```
+
+becomes this in the Rmd file.
+````
+Load some toy data.
+
+```{r demo-chunk, echo = TRUE}`r ''`
+# load some data
+data(mtcars)
+```
+````
+
+When you look at the [generated Rmd file](R_script_to_Rmd.Rmd), it looks 
+exactly like the Rmd file `Rmd_to_R_script.R` that was converted to R scripts 
+before (except for the different title in the file). You only need to follow 
+a small number of formatting rules when you want a nice Rmd file from 
+`knitr::spin()`, which you can see in the [R script](R_script_to_Rmd.R) used as
+input (this is the
+[documentation in R Markdown cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)). 
+
+## Turn Rmd and R scripts into a report
+Rmd files are known for allowing one to easily create reports (in html format,
+PDF etc.) by hitting the "Knit" button in RStudio. The command line 
+equivalent is `rmarkdown::render()`, which, at a minimum, only needs the 
+Rmd file as input. For example, you can create the 
+[PDF RMD_to_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
+format is specified in the Rmd header, so I omit the `output_format` argument
+here.
+```{r RMD-to-PDF, eval = F}
+rmarkdown::render(input = "Rmd_to_R_script.Rmd", 
+                  output_file = "Rmd_to_PDF")
+```
+
+The good thing now is that `rmarkdown::render()` works equally well with *any*
+R script regardless of how it has been formatted. Of course, it makes more sense
+to render a file such as [R_script_to_Rmd.R](R_script_to_Rmd.R) because it 
+produces a nicer PDF.
+
+### So, why is all this interesting?
+I think it is good to know about the two-way street between Rmd files and R 
+scripts and the all-purpose use of `rmarkdown::render()`. The main advantage is
+that one does not have to think much about what format to start with in an 
+analysis. Rmd and R scripts both have their advantages and disadvantages, so one
+format is not unequivocally superior to the other.  
+In some of my courses, for example, some course participants found it
+easier to work with Rmd files, while others could better work with R scripts.
+The good news about `purl()`, `spin()` and `render()` is that everyone can
+work with the preferred format, produce the same beautiful reports and easily
+convert Rmd to R scripts and vice versa, if necessary.
