@@ -1,0 +1,25 @@
+#' ---
+#' title: "Rmd to R script"
+#' author: "Ingo Rohlfing"
+#' date: "`r Sys.Date()`"
+#' output: html_document
+#' ---
+#' 
+#' # Intro
+#' This is a simple Rmd-script that is used to illustrate how it can be 
+#' transformed into a plain R script.
+#' 
+#' ## First some code
+#' Load some toy data.
+## ----demo-chunk, echo = T---------------------------------------------------------------------------------------
+# load some data
+data(mtcars)
+
+#' 
+#' The dataset has `r nrow(mtcars)` rows (to have some inline code).  
+#' And let's a plot of *miles per gallon* (`mpg`) against weight (`wt`).
+#' 
+## ---------------------------------------------------------------------------------------------------------------
+plot(mtcars$mpg, mtcars$wt)
+
+#' 

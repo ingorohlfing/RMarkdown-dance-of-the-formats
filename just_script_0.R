@@ -1,4 +1,0 @@
-# load some data
-data(mtcars)
-
-plot(mtcars$mpg, mtcars$wt)

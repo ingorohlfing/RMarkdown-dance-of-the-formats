@@ -38,7 +38,8 @@ much info you want to preserve. This can be specified with the
 -   `1`: plain code + chunk settings;
 -   `2`: the complete Rmd file, just in a different format.
 
-**Rmd =&gt; plain code**  
+### Rmd =&gt; plain code
+
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script
 only with code and annotations](just_code_0.R). Since the identifying
 information is part of the Rmd header, this information is gone now as
@@ -63,14 +64,15 @@ becomes simply this in the script.
     # load some data
     data(mtcars)
 
-**Rmd to code + chunk info** This command reduces [the Rmd
-file](Rmd_to_R_script.Rmd) to [an R script only with code, annotations
-nd chunk info](code_chunkinfo_1.R).
+### Rmd =&gt; code + chunk info
+
+This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script
+only with code, annotations nd chunk info](code_chunkinfo_1.R).
 
 ``` r
 knitr::purl(input = "Rmd_to_R_script.Rmd", 
             output = "code_chunkinfo_1.R",
-            documentation = 1) # just the code
+            documentation = 1) # code + chunk info
 ```
 
 For illustration, this part of the Rmd file…
@@ -88,8 +90,39 @@ becomes this in the script.
     data(mtcars)
 
 When you then knit the two R scripts, they almost look the same because
-the content is the same (compare the html reports for
-[0](just_code_0.html) to [1](code_chunkinfo_1.html). The only reason I
-see for converting with `documentation = 1` is that you can directly
-navigate to a selected chunks and easily move back and forth between
-them.
+the content is the same (compare the html reports for [plain
+code](just_code_0.pdf) to [chunk info + code](code_chunkinfo_1.pdf). The
+only reason I see for converting with `documentation = 1` is that you
+can directly navigate to a selected chunks and easily move back and
+forth between them.
+
+### Rmd =&gt; identical R script
+
+This command converts [the Rmd file](Rmd_to_R_script.Rmd) to [an R
+script that has exactly the same content](complete_script_2.R).
+
+``` r
+knitr::purl(input = "Rmd_to_R_script.Rmd", 
+            output = "complete_script_2.R",
+            documentation = 2) # full conversion
+```
+
+For illustration, this part of the Rmd file…
+
+    Load some toy data.
+    ```{r, demo-chunk, echo = T}
+    # load some data
+    data(mtcars)
+    ```
+
+becomes this in the script.
+
+    #' Load some toy data.
+    ## ----demo-chunk, echo = T----------------------------------------------------
+    # load some data
+    data(mtcars)
+
+The formatting is different in the script, but the exact same info is
+preserved. You see knitted PDFs are the same when you prepare a PDF
+report for [the Rmd file](Rmd_to_PDF.pdf) and the [converted R
+script](complete_script_2.pdf).
