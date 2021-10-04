@@ -31,7 +31,7 @@ by Xie, Dervieux and Riederer. Still, I wanted to post this here because I
 - believe these very useful features of R Markdown are not as widely known as
 they probably should.
 
-## From Rmd to an R script
+## From an Rmd file to an R script
 When you have an Rmd file like [this one](Rmd_to_R_script.Rmd) and want to 
 turn it into an R script, you need `knitr::purl()`. You can convert an Rmd file
 into an R script in *three different ways*, depending on how much info you want
@@ -61,7 +61,7 @@ data(mtcars)
 ```
 ````
 
-becomes simply this in the script.
+becomes this in the script.
 ```
 # load some data
 data(mtcars)
@@ -166,8 +166,8 @@ exactly like the Rmd file `Rmd_to_R_script.R` that was converted to R scripts
 before (except for the different title in the file). You only need to follow 
 a small number of formatting rules when you want a nice Rmd file from 
 `knitr::spin()`, which you can see in the [R script](R_script_to_Rmd.R) used as
-input (this is the
-[documentation in R Markdown cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)). 
+input (this is information about formatting in the
+[R Markdown cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)). 
 
 ## Turn Rmd and R scripts into a report
 Rmd files are known for allowing one to easily create reports (in html format,
@@ -191,10 +191,45 @@ produces a nicer PDF.
 I think it is good to know about the two-way street between Rmd files and R 
 scripts and the all-purpose use of `rmarkdown::render()`. The main advantage is
 that one does not have to think much about what format to start with in an 
-analysis. Rmd and R scripts both have their advantages and disadvantages, so one
-format is not unequivocally superior to the other.  
+analysis. Rmd files and R scripts both have their advantages and disadvantages
+and one format is not clearly superior to the other.  
 In some of my courses, for example, some course participants found it
 easier to work with Rmd files, while others could better work with R scripts.
 The good news about `purl()`, `spin()` and `render()` is that everyone can
 work with the preferred format, produce the same beautiful reports and easily
-convert Rmd to R scripts and vice versa, if necessary.
+convert Rmd files to R scripts and vice versa, if necessary.
+
+#### Packages used (on the surface)
+Hadley Wickham, Jim Hester and Winston Chang (2021). *devtools: Tools to Make
+Developing R Packages Easier.* R package version 2.4.2.
+<https://CRAN.R-project.org/package=devtools>
+
+JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin 
+Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang and 
+Richard Iannone (2021). *rmarkdown: Dynamic Documents for R.*
+R package version 2.11. <https://rmarkdown.rstudio.com>.
+
+Yihui Xie (2021). *knitr: A General-Purpose Package for Dynamic Report 
+Generation in R.* R package version 1.36.
+
+Yihui Xie (2015). *Dynamic Documents with R and knitr.* 2nd edition. 
+Chapman and Hall/CRC. 
+
+Yihui Xie (2014). *knitr: A Comprehensive Tool for Reproducible Research in R.*
+In Victoria Stodden, Friedrich Leisch and Roger D. Peng, editors, 
+Implementing Reproducible Computational Research. Chapman and Hall/CRC. 
+
+Yihui Xie and J.J. Allaire and Garrett Grolemund (2018). *R Markdown: 
+The Definitive Guide.* Chapman and Hall/CRC. 
+<https://bookdown.org/yihui/rmarkdown>.
+
+Yihui Xie and Christophe Dervieux and Emily Riederer (2020). 
+*R Markdown Cookbook.* Chapman and Hall/CRC. 
+<https://bookdown.org/yihui/rmarkdown-cookbook>.
+
+#### Session paramaters
+```{r, echo = FALSE, eval = TRUE}
+devtools::session_info()
+```
+
+
