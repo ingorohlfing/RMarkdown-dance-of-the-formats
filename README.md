@@ -1,23 +1,23 @@
 README
 ================
 Ingo Rohlfing
-2021-10-04
+2021-10-06
 
-## Short explainer on motivation
+## Short explanation of motivation
 
 R Markdown reports are a great tool for turning dynamic code and text
-into a full-fledged report as PDF, Word file or another format. When one
-is familiar with R Markdown reports, then one most likely knows Rmd
-scripts visually separating text from chunks with code in them.
+into a full-fledged report as PDF, Word file or another format. Everyone
+who is familiar with R Markdown reports most likely knows Rmd scripts
+that visually separate text and code output from chunks containing code.
 
-What I only learned over time, slowly, about R Markdown, are two related
-things:
+There are two related facts about R Markdown that I only learned slowly,
+over time:
 
 1.  One can transform Rmd files into R scripts and vice versa.
 2.  One can render R scripts into R Markdown reports.
 
-As probably everything with R Markdown, this is well documented in the
-awesome [R Markdown
+As is probably true about all aspects of R Markdown, this is well
+documented in the awesome [R Markdown
 Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) by Xie,
 Dervieux and Riederer. Still, I wanted to post this here because I
 
@@ -31,19 +31,19 @@ Dervieux and Riederer. Still, I wanted to post this here because I
 When you have an Rmd file like [this one](Rmd_to_R_script.Rmd) and want
 to turn it into an R script, you need `knitr::purl()`. You can convert
 an Rmd file into an R script in *three different ways*, depending on how
-much info you want to preserve. This can be specified with the
-`documentation` argument where
+much information you want to preserve. This can be specified with the
+`documentation` argument where:
 
 -   `0`: plain code;
 -   `1`: plain code + chunk settings;
 -   `2`: the complete Rmd file, just in a different format.
 
-### Rmd => plain code
+### Rmd =&gt; plain code
 
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script
 only with code and annotations](just_code_0.R). Since the identifying
-information is part of the Rmd header, this information is gone now as
-is all tex.
+information is part of the Rmd header, this information is now gone, as
+is all text.
 
 ``` r
 knitr::purl(input = "Rmd_to_R_script.Rmd", 
@@ -64,10 +64,10 @@ becomes this in the script.
     # load some data
     data(mtcars)
 
-### Rmd => code + chunk info
+### Rmd =&gt; code + chunk info
 
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script
-only with code, annotations nd chunk info](code_chunkinfo_1.R).
+only with code, annotations and chunk info](code_chunkinfo_1.R).
 
 ``` r
 knitr::purl(input = "Rmd_to_R_script.Rmd", 
@@ -89,14 +89,14 @@ becomes this in the script.
     # load some data
     data(mtcars)
 
-When you then knit the two R scripts, they almost look the same because
-the content is the same (compare the html reports for [plain
+When you turn the two R scripts into reports, they almost look the same
+because the content is the same (compare the html reports for [plain
 code](just_code_0.pdf) to [chunk info + code](code_chunkinfo_1.pdf). The
 only reason I see for converting with `documentation = 1` is that you
-can directly navigate to a selected chunks and easily move back and
-forth between them.
+can directly navigate to a selected chunk, as well as easily moving back
+and forth between them.
 
-### Rmd => identical R script
+### Rmd =&gt; identical R script
 
 This command converts [the Rmd file](Rmd_to_R_script.Rmd) to [an R
 script that has exactly the same content](complete_script_2.R).
@@ -122,11 +122,11 @@ becomes this in the script.
     # load some data
     data(mtcars)
 
-The formatting is different in the script, but the exact same info is
-preserved. You see knitted PDFs are the same when you prepare a PDF
-report for [the Rmd file](Rmd_to_PDF.pdf) and the [converted R
-script](complete_script_2.pdf). (I haven’t edited the R script after
-conversion, so they also have the same title.)
+The formatting is different in the script, but the exact same
+information is preserved. You will see the knitted PDFs are the same
+when you prepare a PDF report for [the Rmd file](Rmd_to_PDF.pdf) and the
+[converted R script](complete_script_2.pdf). (I haven’t edited the R
+script after conversion, so they also have the same title.)
 
 ## From an R script to an Rmd file
 
@@ -157,21 +157,21 @@ becomes this in the Rmd file.
     ```
 
 When you look at the [generated Rmd file](R_script_to_Rmd.Rmd), it looks
-exactly like the Rmd file `Rmd_to_R_script.R` that was converted to R
-scripts before (except for the different title in the file). You only
-need to follow a small number of formatting rules when you want a nice
-Rmd file from `knitr::spin()`, which you can see in the [R
+exactly like the Rmd file `Rmd_to_R_script.R` that was previously
+converted to R scripts (except for the different title in the file). You
+only need to follow a small number of formatting rules when you want a
+nice Rmd file from `knitr::spin()`, which you can see in the [R
 script](R_script_to_Rmd.R) used as input (this is information about
 formatting in the [R Markdown
 cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)).
 
 ## Turn Rmd and R scripts into a report
 
-Rmd files are known for allowing one to easily create reports (in html
+Rmd files are known for allowing one to simply create reports (in html
 format, PDF etc.) by hitting the “Knit” button in RStudio. The command
 line equivalent is `rmarkdown::render()`, which, at a minimum, only
 needs the Rmd file as input. For example, you can create the [PDF
-RMD_to_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
+RMD\_to\_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
 format is specified in the Rmd header, so I omit the `output_format`
 argument here.
 
@@ -183,16 +183,25 @@ rmarkdown::render(input = "Rmd_to_R_script.Rmd",
 The good thing now is that `rmarkdown::render()` works equally well with
 *any* R script regardless of how it has been formatted. Of course, it
 makes more sense to render a file such as
-[R_script_to_Rmd.R](R_script_to_Rmd.R) because it produces a nicer PDF.
+[R\_script\_to\_Rmd.R](R_script_to_Rmd.R) because it produces a more
+attractive PDF. This [PDF](R_script_to_PDF.pdf) has been produced with
+this command.
 
-### So, why is all this interesting?
+``` r
+rmarkdown::render(input = "R_script_to_RMD.R", 
+                  output_file = "R_script_to_PDF") # PDF is specified in header
+```
+
+Another good feature of `rmarkdown::render()` is that you can create a
+report without having the file that is to be rendered open in RStudio.
+
+### So, why is all of this of interest?
 
 I think it is good to know about the two-way street between Rmd files
 and R scripts and the all-purpose use of `rmarkdown::render()`. The main
 advantage is that one does not have to think much about what format to
-start with in an analysis. Rmd files and R scripts both have their
-advantages and disadvantages and one format is not clearly superior to
-the other.  
+start with in an analysis. Rmd files and R scripts have both advantages
+and disadvantages and one format is not clearly superior to the other.  
 In some of my courses, for example, some course participants found it
 easier to work with Rmd files, while others could better work with R
 scripts. The good news about `purl()`, `spin()` and `render()` is that
@@ -203,7 +212,7 @@ necessary.
 #### Packages used (on the surface)
 
 Hadley Wickham, Jim Hester and Winston Chang (2021). *devtools: Tools to
-Make Developing R Packages Easier.* R package version 2.4.2.  
+Make Developing R Packages Easier.* R package version 2.4.2.
 <https://CRAN.R-project.org/package=devtools>
 
 JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and
@@ -214,12 +223,13 @@ R package version 2.11. <https://rmarkdown.rstudio.com>.
 Yihui Xie (2021). *knitr: A General-Purpose Package for Dynamic Report
 Generation in R.* R package version 1.36.
 
-Yihui Xie (2015). *Dynamic Documents with R and knitr.* 2nd edition.
+Yihui Xie (2015). *Dynamic Documents with R and knitr.* (2nd ed.)
 Chapman and Hall/CRC.
 
 Yihui Xie (2014). *knitr: A Comprehensive Tool for Reproducible Research
 in R.* In Victoria Stodden, Friedrich Leisch and Roger D. Peng, editors,
-Implementing Reproducible Computational Research. Chapman and Hall/CRC.
+*Implementing Reproducible Computational Research*. Chapman and
+Hall/CRC.
 
 Yihui Xie and J.J. Allaire and Garrett Grolemund (2018). *R Markdown:
 The Definitive Guide.* Chapman and Hall/CRC.
@@ -229,7 +239,7 @@ Yihui Xie and Christophe Dervieux and Emily Riederer (2020). *R Markdown
 Cookbook.* Chapman and Hall/CRC.
 <https://bookdown.org/yihui/rmarkdown-cookbook>.
 
-#### Session paramaters
+#### Session parameters
 
     ## - Session info ---------------------------------------------------------------
     ##  setting  value                       
@@ -241,7 +251,7 @@ Cookbook.* Chapman and Hall/CRC.
     ##  collate  German_Germany.1252         
     ##  ctype    German_Germany.1252         
     ##  tz       Europe/Berlin               
-    ##  date     2021-10-04                  
+    ##  date     2021-10-06                  
     ## 
     ## - Packages -------------------------------------------------------------------
     ##  package     * version date       lib source        
@@ -258,7 +268,7 @@ Cookbook.* Chapman and Hall/CRC.
     ##  fs            1.5.0   2020-07-31 [1] CRAN (R 4.1.1)
     ##  glue          1.4.2   2020-08-27 [1] CRAN (R 4.1.1)
     ##  htmltools     0.5.2   2021-08-25 [1] CRAN (R 4.1.1)
-    ##  knitr         1.36    2021-09-29 [1] CRAN (R 4.1.1)
+    ##  knitr         1.34    2021-09-09 [1] CRAN (R 4.1.1)
     ##  lifecycle     1.0.1   2021-09-24 [1] CRAN (R 4.1.1)
     ##  magrittr      2.0.1   2020-11-17 [1] CRAN (R 4.1.1)
     ##  memoise       2.0.0   2021-01-26 [1] CRAN (R 4.1.1)
@@ -283,4 +293,5 @@ Cookbook.* Chapman and Hall/CRC.
     ##  xfun          0.26    2021-09-14 [1] CRAN (R 4.1.1)
     ##  yaml          2.2.1   2020-02-01 [1] CRAN (R 4.1.1)
     ## 
-    ## [1] C:/Users/wmc769/Documents/R/R-4.1.1/library
+    ## [1] C:/Users/Ingo R/Documents/R/win-library/4.1
+    ## [2] C:/Program Files/R/R-4.1.1/library
