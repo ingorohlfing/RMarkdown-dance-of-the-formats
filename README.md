@@ -1,7 +1,7 @@
 README
 ================
 Ingo Rohlfing
-2021-10-06
+2021-10-07
 
 ## Short explanation of motivation
 
@@ -34,11 +34,12 @@ an Rmd file into an R script in *three different ways*, depending on how
 much information you want to preserve. This can be specified with the
 `documentation` argument where:
 
--   `0`: plain code;
--   `1`: plain code + chunk settings;
--   `2`: the complete Rmd file, just in a different format.
+-   `0`: plain code + annotations;
+-   `1`: plain code + annotations + chunk information;
+-   `2`: the same information as in Rmd file, just in a different
+    format.
 
-### Rmd =&gt; plain code
+### Rmd => plain code
 
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script
 only with code and annotations](just_code_0.R). Since the identifying
@@ -64,7 +65,7 @@ becomes this in the script.
     # load some data
     data(mtcars)
 
-### Rmd =&gt; code + chunk info
+### Rmd => code + chunk information
 
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script
 only with code, annotations and chunk info](code_chunkinfo_1.R).
@@ -72,7 +73,7 @@ only with code, annotations and chunk info](code_chunkinfo_1.R).
 ``` r
 knitr::purl(input = "Rmd_to_R_script.Rmd", 
             output = "code_chunkinfo_1.R",
-            documentation = 1) # code + chunk info
+            documentation = 1) # code + chunk information
 ```
 
 For illustration, this part of the Rmd file…
@@ -90,13 +91,13 @@ becomes this in the script.
     data(mtcars)
 
 When you turn the two R scripts into reports, they almost look the same
-because the content is the same (compare the html reports for [plain
+because the content is the same (compare the PDF reports for [plain
 code](just_code_0.pdf) to [chunk info + code](code_chunkinfo_1.pdf). The
 only reason I see for converting with `documentation = 1` is that you
 can directly navigate to a selected chunk, as well as easily moving back
 and forth between them.
 
-### Rmd =&gt; identical R script
+### Rmd => identical R script
 
 This command converts [the Rmd file](Rmd_to_R_script.Rmd) to [an R
 script that has exactly the same content](complete_script_2.R).
@@ -157,11 +158,11 @@ becomes this in the Rmd file.
     ```
 
 When you look at the [generated Rmd file](R_script_to_Rmd.Rmd), it looks
-exactly like the Rmd file `Rmd_to_R_script.R` that was previously
+exactly like the Rmd file `Rmd_to_R_script.Rmd` that was previously
 converted to R scripts (except for the different title in the file). You
 only need to follow a small number of formatting rules when you want a
 nice Rmd file from `knitr::spin()`, which you can see in the [R
-script](R_script_to_Rmd.R) used as input (this is information about
+script](R_script_to_Rmd.R) used as input (here is information about
 formatting in the [R Markdown
 cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)).
 
@@ -170,8 +171,8 @@ cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)).
 Rmd files are known for allowing one to simply create reports (in html
 format, PDF etc.) by hitting the “Knit” button in RStudio. The command
 line equivalent is `rmarkdown::render()`, which, at a minimum, only
-needs the Rmd file as input. For example, you can create the [PDF
-RMD\_to\_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
+needs the Rmd file as input. For example, you can create the PDF
+[RMD_to_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
 format is specified in the Rmd header, so I omit the `output_format`
 argument here.
 
@@ -183,8 +184,8 @@ rmarkdown::render(input = "Rmd_to_R_script.Rmd",
 The good thing now is that `rmarkdown::render()` works equally well with
 *any* R script regardless of how it has been formatted. Of course, it
 makes more sense to render a file such as
-[R\_script\_to\_Rmd.R](R_script_to_Rmd.R) because it produces a more
-attractive PDF. This [PDF](R_script_to_PDF.pdf) has been produced with
+[R_script_to_Rmd.R](R_script_to_Rmd.R) because it produces a more
+attractive PDF. [This PDF](R_script_to_PDF.pdf) has been produced with
 this command.
 
 ``` r
@@ -209,7 +210,7 @@ everyone can work with the preferred format, produce the same beautiful
 reports and easily convert Rmd files to R scripts and vice versa, if
 necessary.
 
-#### Packages used (on the surface)
+### Packages used (on the surface)
 
 Hadley Wickham, Jim Hester and Winston Chang (2021). *devtools: Tools to
 Make Developing R Packages Easier.* R package version 2.4.2.
@@ -239,21 +240,21 @@ Yihui Xie and Christophe Dervieux and Emily Riederer (2020). *R Markdown
 Cookbook.* Chapman and Hall/CRC.
 <https://bookdown.org/yihui/rmarkdown-cookbook>.
 
-#### Session parameters
+### Session parameters
 
-    ## - Session info ---------------------------------------------------------------
+    ## - Session info ----------------------------------------------------------------------------
     ##  setting  value                       
     ##  version  R version 4.1.1 (2021-08-10)
     ##  os       Windows 10 x64              
     ##  system   x86_64, mingw32             
-    ##  ui       RTerm                       
+    ##  ui       RStudio                     
     ##  language (EN)                        
     ##  collate  German_Germany.1252         
     ##  ctype    German_Germany.1252         
     ##  tz       Europe/Berlin               
-    ##  date     2021-10-06                  
+    ##  date     2021-10-07                  
     ## 
-    ## - Packages -------------------------------------------------------------------
+    ## - Packages --------------------------------------------------------------------------------
     ##  package     * version date       lib source        
     ##  cachem        1.0.6   2021-08-19 [1] CRAN (R 4.1.1)
     ##  callr         3.7.0   2021-04-20 [1] CRAN (R 4.1.1)
@@ -268,7 +269,7 @@ Cookbook.* Chapman and Hall/CRC.
     ##  fs            1.5.0   2020-07-31 [1] CRAN (R 4.1.1)
     ##  glue          1.4.2   2020-08-27 [1] CRAN (R 4.1.1)
     ##  htmltools     0.5.2   2021-08-25 [1] CRAN (R 4.1.1)
-    ##  knitr         1.34    2021-09-09 [1] CRAN (R 4.1.1)
+    ##  knitr         1.36    2021-09-29 [1] CRAN (R 4.1.1)
     ##  lifecycle     1.0.1   2021-09-24 [1] CRAN (R 4.1.1)
     ##  magrittr      2.0.1   2020-11-17 [1] CRAN (R 4.1.1)
     ##  memoise       2.0.0   2021-01-26 [1] CRAN (R 4.1.1)
@@ -283,7 +284,6 @@ Cookbook.* Chapman and Hall/CRC.
     ##  rlang         0.4.11  2021-04-30 [1] CRAN (R 4.1.1)
     ##  rmarkdown     2.11    2021-09-14 [1] CRAN (R 4.1.1)
     ##  rprojroot     2.0.2   2020-11-15 [1] CRAN (R 4.1.1)
-    ##  rstudioapi    0.13    2020-11-12 [1] CRAN (R 4.1.1)
     ##  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 4.1.1)
     ##  stringi       1.7.4   2021-08-25 [1] CRAN (R 4.1.1)
     ##  stringr       1.4.0   2019-02-10 [1] CRAN (R 4.1.1)
@@ -293,5 +293,4 @@ Cookbook.* Chapman and Hall/CRC.
     ##  xfun          0.26    2021-09-14 [1] CRAN (R 4.1.1)
     ##  yaml          2.2.1   2020-02-01 [1] CRAN (R 4.1.1)
     ## 
-    ## [1] C:/Users/Ingo R/Documents/R/win-library/4.1
-    ## [2] C:/Program Files/R/R-4.1.1/library
+    ## [1] C:/Users/wmc769/Documents/R/R-4.1.1/library

@@ -39,9 +39,9 @@ into an R script in *three different ways*, depending on how much information
 you want to preserve. This can be specified with the `documentation` argument
 where:
 
-- `0`: plain code;
-- `1`: plain code + chunk settings;
-- `2`: the complete Rmd file, just in a different format.
+- `0`: plain code + annotations;
+- `1`: plain code + annotations + chunk information;
+- `2`: the same information as in Rmd file, just in a different format.
 
 ### Rmd => plain code
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script only 
@@ -69,13 +69,13 @@ becomes this in the script.
 data(mtcars)
 ```
 
-### Rmd => code + chunk info
+### Rmd => code + chunk information
 This command reduces [the Rmd file](Rmd_to_R_script.Rmd) to [an R script only 
 with code, annotations and chunk info](code_chunkinfo_1.R). 
 ```{r, eval = F}
 knitr::purl(input = "Rmd_to_R_script.Rmd", 
             output = "code_chunkinfo_1.R",
-            documentation = 1) # code + chunk info
+            documentation = 1) # code + chunk information
 ```
 
 For illustration, this part of the Rmd file...
@@ -96,7 +96,7 @@ data(mtcars)
 ```
 
 When you turn the two R scripts into reports, they almost look the same because
-the content is the same (compare the html reports for 
+the content is the same (compare the PDF reports for 
 [plain code](just_code_0.pdf) to [chunk info + code](code_chunkinfo_1.pdf). 
 The only reason I see for converting with `documentation = 1` is that you can 
 directly navigate to a selected chunk, as well as easily moving back and forth
@@ -164,11 +164,11 @@ data(mtcars)
 ````
 
 When you look at the [generated Rmd file](R_script_to_Rmd.Rmd), it looks 
-exactly like the Rmd file `Rmd_to_R_script.R` that was previously converted to
+exactly like the Rmd file `Rmd_to_R_script.Rmd` that was previously converted to
 R scripts (except for the different title in the file). You only need to follow 
 a small number of formatting rules when you want a nice Rmd file from 
 `knitr::spin()`, which you can see in the [R script](R_script_to_Rmd.R) used as
-input (this is information about formatting in the
+input (here is information about formatting in the
 [R Markdown cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/spin.html)). 
 
 ## Turn Rmd and R scripts into a report
@@ -176,7 +176,7 @@ Rmd files are known for allowing one to simply create reports (in html format,
 PDF etc.) by hitting the "Knit" button in RStudio. The command line 
 equivalent is `rmarkdown::render()`, which, at a minimum, only needs the 
 Rmd file as input. For example, you can create the 
-[PDF RMD_to_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
+PDF [RMD_to_pdf](Rmd_to_PDF.pdf) with the following line. PDF as an output
 format is specified in the Rmd header, so I omit the `output_format` argument
 here.
 ```{r RMD-to-PDF}
@@ -187,7 +187,7 @@ rmarkdown::render(input = "Rmd_to_R_script.Rmd",
 The good thing now is that `rmarkdown::render()` works equally well with *any*
 R script regardless of how it has been formatted. Of course, it makes more sense
 to render a file such as [R_script_to_Rmd.R](R_script_to_Rmd.R) because it 
-produces a more attractive PDF. This [PDF](R_script_to_PDF.pdf) has been
+produces a more attractive PDF. [This PDF](R_script_to_PDF.pdf) has been
 produced with this command.
 ```{r R-script-to-PDF}
 rmarkdown::render(input = "R_script_to_RMD.R", 
@@ -210,7 +210,7 @@ The good news about `purl()`, `spin()` and `render()` is that everyone can
 work with the preferred format, produce the same beautiful reports and easily
 convert Rmd files to R scripts and vice versa, if necessary.
 
-#### Packages used (on the surface)
+### Packages used (on the surface)
 Hadley Wickham, Jim Hester and Winston Chang (2021). *devtools: Tools to Make
 Developing R Packages Easier.* R package version 2.4.2.
 <https://CRAN.R-project.org/package=devtools>
@@ -238,7 +238,7 @@ Yihui Xie and Christophe Dervieux and Emily Riederer (2020).
 *R Markdown Cookbook.* Chapman and Hall/CRC. 
 <https://bookdown.org/yihui/rmarkdown-cookbook>.
 
-#### Session parameters
+### Session parameters
 ```{r, echo = FALSE, eval = TRUE}
 devtools::session_info()
 ```
